@@ -1,0 +1,18 @@
+.pagination{
+    width: full;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+}
+.pagination button{
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid goldenrod;
+    border-radius: 10px;
+}
+.selected {
+    padding: 20px;
+    margin: 20px;
+    background-color: rgb(23, 14, 1);
+    color: rgb(8, 235, 8);
+}
