@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Order = ({ order ,handleDeleteOrders}) => {
-    const { img, price, name, stock, category } = order
+    const { img, price, name, stock, category,email } = order
     return (
         <tr>
             <th>
@@ -32,7 +32,7 @@ const Order = ({ order ,handleDeleteOrders}) => {
                 }
             </td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <button className="btn btn-ghost btn-xs">{email}</button>
             </th>
         </tr>
     );

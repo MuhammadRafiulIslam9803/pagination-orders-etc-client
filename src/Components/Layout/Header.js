@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Context And firebase/UserContext';
 
 const Header = () => {
+    const {user ,logOut} = useContext(AuthContext)
+    const handleLogOut =()=>{
+        logOut().then(()=>{
+            //logOut Successfully
+        })
+    }
+
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -15,6 +23,10 @@ const Header = () => {
                     <li>
                         <Link to='/orders'>Orders</Link>
                     </li>
+                    {user?.email ? 
+                    <li onClick={handleLogOut}> <Link to=''>Logout</Link></li> 
+                    :
+                    <li> <Link to='/login'>Login</Link></li> }
                 </ul>
             </div>
         </div>

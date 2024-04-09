@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './PaginationStyle.css'
 
 import Product from './Product';
+import { AuthContext } from './Context And firebase/UserContext';
 const Productonteiner = () => {
+    const {user} = useContext(AuthContext)
     const [products, setProducts] = useState([])
     const [count ,setCount]= useState(0)
     const [page ,setPage]= useState(0)
@@ -40,6 +42,7 @@ const Productonteiner = () => {
             price : order.price,
             img : order.img,
             name : order.name,
+            email : user.email,
         }
         fetch('http://localhost:5000/orders',{
             method : 'POST',

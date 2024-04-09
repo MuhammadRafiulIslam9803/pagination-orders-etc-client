@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Order from './Order';
+import { AuthContext } from './Context And firebase/UserContext';
 
 const Orders = () => {
+    const {user ,logOut} = useContext(AuthContext)
     const [orders ,setOrders] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/orders')
-        .then(res=>res.json())
+        fetch(`http://localhost:5000/orders?email=${user?.email}`,{
+            headers :{
+                authorization : `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(res=>{
+            if(res.status === 401 || res.status === 403){
+                logOut()
+            }
+            return res.json()
+        
+        })
         .then(data => setOrders(data))
-    },[])
+    },[user?.email])
 
     
     const handleDeleteOrders = order =>{
@@ -29,6 +41,7 @@ const Orders = () => {
     }
     return (
         <div className="overflow-x-auto">
+            <h1 className=' text-4xl'>You Have now {orders.length} orders</h1>
             <table className="table">
                 {/* head */}
                 <thead>
